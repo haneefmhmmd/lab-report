@@ -1,0 +1,42 @@
+.btn {
+    margin: 0;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 0 8px;
+    min-width: 160px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.btn--primary {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.btn--secondary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.icon-only.btn {
+    min-width: initial;
+    border-radius: 50%;
+}
+
+.icon-left.btn svg {
+    margin-right: 8px;
+}
+
+.icon-right.btn svg {
+    margin-left: 8px;
+}
+
+.btn.btn svg {
+    width: 24px;
+    height: 24px;
+}

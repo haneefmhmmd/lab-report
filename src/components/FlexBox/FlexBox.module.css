@@ -1,0 +1,37 @@
+.flex {
+    display: flex;
+    gap: var(--gutter) * 4px !important;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+[style*='--gutter'] {
+    --gutter: 0;
+    gap: calc(var(--gutter) * 4px) !important;
+}
