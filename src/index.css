@@ -270,3 +270,24 @@ table {
 .text--quaternary {
 	color: var(--quaternary-color);
 }
+
+.ml-auto {
+	margin-left: auto;
+}
+
+.mr-auto {
+	margin-right: auto;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 16px;
+	background-color: white;
+}
