@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './Inputfield.module.css';
-export default function Inputfield({ name, isCondensed = false, label, value, placeholder, ...restProps }) {
+export default function Inputfield({ name, isCondensed = false, isGhost = false, label, value, placeholder, wrapClassName = "", ...restProps }) {
 
-    const isCondensedClassName = isCondensed ? 'condensed' : '';
-    const generatedClassName = `${styles["input-container"]} ${isCondensedClassName}`.trim();
+    const isCondensedClassName = isCondensed ? styles["condensed"] : '';
+    const isGhostClassName = isGhost ? styles['ghost'] : '';
+    const generatedClassName = `${styles["input-container"]} ${isCondensedClassName} ${isGhostClassName} ${wrapClassName}`.trim();
 
     return (
         <div className={generatedClassName}>

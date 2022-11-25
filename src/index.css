@@ -129,6 +129,12 @@ table {
 	border-spacing: 0;
 }
 
+button {
+	outline: none;
+	margin: 0;
+	padding: 0;
+}
+
 :root {
 	font-family: 'Ubuntu', sans-serif;
 	--primary-color: #0A132B;

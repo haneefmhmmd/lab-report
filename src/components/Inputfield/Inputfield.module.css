@@ -18,6 +18,15 @@
     border-radius: 4px;
 }
 
+
 .input-container.condensed label {
     display: none;
+}
+
+.input-container.ghost input {
+    border-color: transparent;
+}
+
+.input-container.ghost input:focus {
+    background-color: var(--quaternary-color);
 }

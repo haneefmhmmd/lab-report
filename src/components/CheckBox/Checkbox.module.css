@@ -1,0 +1,28 @@
+.checkBox {
+    --checkbox-border-color: var(--tertiary-color);
+    --checkbox-hover-border-color: var(--primary-color);
+    --checkbox-checked-border-color: var(--primary-color);
+    --checkbox-checked-bg-color: var(--primary-color);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid var(--checkbox-border-color);
+    background: transparent;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkBox:hover,
+.checkBox:focus {
+    border-color: var(--checkbox-hover-border-color);
+}
+
+.checkBox.checked {
+    border-color: var(--checkbox-checked-border-color);
+    background-color: var(--checkbox-checked-bg-color);
+    stroke: #fff;
+}
