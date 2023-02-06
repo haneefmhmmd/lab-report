@@ -4,7 +4,7 @@ export default function Header({ title }) {
     return (
         <header className={styles.header}>
             <div className='container'>
-                <h2>{title}</h2>
+                <h1>{title}</h1>
             </div>
         </header>
     )

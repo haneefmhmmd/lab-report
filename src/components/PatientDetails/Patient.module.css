@@ -1,5 +1,5 @@
 .container {
-    padding: 16px;
+    padding: 32px 16px;
     margin-top: 40px;
     border: 1px solid var(--primary-color);
     border-radius: 4px;
@@ -27,6 +27,6 @@
     margin-right: 20px;
 }
 
-.form-container *:nth-child(n+3) {
-    margin-top: 20px;
+.form-container > *:nth-child(n+3) {
+    margin-top: 32px;
 }

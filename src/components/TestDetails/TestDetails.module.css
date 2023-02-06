@@ -2,6 +2,12 @@
     width: 100%;
 }
 
+@media only screen and (max-width: 760px){
+    .tableWrapper{
+        overflow-x: auto;
+    }
+}
+
 .table {
     width: 100%;
     table-layout: fixed;
@@ -70,6 +76,33 @@
 
 .headerRow th:nth-child(3) {
     width: 180px;
+}
+
+.row{
+    position: relative;
+}
+
+.tableDeleteBtn{
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    transform: translateY(-50%);
+    display: none;
+    vertical-align: middle;
+    z-index: 1;
+}
+
+.row::after{
+    content: '';
+    position: absolute;
+    right: -40px;
+    display: block;
+    width: 40px;
+    height: 100%;
+}
+
+.row:hover .tableDeleteBtn{
+    display: flex;
 }
 
 /* .table input {

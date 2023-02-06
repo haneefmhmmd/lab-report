@@ -141,6 +141,7 @@ button {
 	--secondary-color: #F4f4f4;
 	--tertiary-color: #C4C4C4;
 	--quaternary-color: #EEF0F5;
+	--danger-color: #e93b34;
 	box-sizing: border-box;
 	--p: 0;
 	--pt: 0;
