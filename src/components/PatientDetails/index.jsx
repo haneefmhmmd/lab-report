@@ -55,13 +55,13 @@ export default function PatientDetails({ ...restProps }) {
 
 
     const onInputChange = (e) => {
-        checkValidity(e);
         setPatientDetails({ ...patientDetails, [e.target.id]: e.target.value });
     }
 
     const onSexAndInputChange = (e) => {
         const currentInputValue = patientDetails.sexAndAge;
         const currentInputValueLength = patientDetails.sexAndAge.length;
+        checkValidity(e);
         if (currentInputValueLength == 0) {
             setPatientDetails({ ...patientDetails, [e.target.id]: `${e.target.value.toUpperCase()} / ` });
             return;
