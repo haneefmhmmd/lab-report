@@ -115,7 +115,7 @@ export default function PatientDetails({ ...restProps }) {
                     name="reference"
                     label="Reference"
                     value={patientDetails.reference}
-                    placeholder="Enter Referencee"
+                    placeholder="Enter Reference"
                     id="reference"
                     error={isValid.reference.status}
                     errorMessage={isValid.reference.message}
