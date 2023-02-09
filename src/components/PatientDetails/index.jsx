@@ -55,6 +55,7 @@ export default function PatientDetails({ ...restProps }) {
 
 
     const onInputChange = (e) => {
+        checkValidity(e);
         setPatientDetails({ ...patientDetails, [e.target.id]: e.target.value });
     }
 
