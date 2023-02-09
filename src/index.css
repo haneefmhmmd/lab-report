@@ -290,11 +290,15 @@ button {
 	text-align: center;
 }
 
+.hide {
+	display: none !important;
+}
+
 .footer {
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	padding: 16px;
+	padding: 16px 0;
 	background-color: white;
 }

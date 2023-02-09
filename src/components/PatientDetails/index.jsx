@@ -6,14 +6,14 @@ import styles from './Patient.module.css';
 export default function PatientDetails({ ...restProps }) {
 
     const [patientDetails, setPatientDetails] = useState({
-        name:"",
+        name: "",
         sexAndAge: "",
-        dateOfTest:new Date().toISOString().split('T')[0],
-        reference:""
+        dateOfTest: new Date().toISOString().split('T')[0],
+        reference: ""
     });
 
     const [isValid, setIsValid] = useState({
-        name : {
+        name: {
             status: null,
             message: ''
         },
@@ -28,52 +28,53 @@ export default function PatientDetails({ ...restProps }) {
         reference: {
             status: null,
             message: ''
-        }        
+        }
     });
 
     const errorMessages = {
-        name:"Name cannot be empty!",
+        name: "Name cannot be empty!",
         sexAndAge: "Sex And Age cannot be empty!",
-        dateOfTest:"All date field should be filled",
-        reference:"Reference cannot be empty!"    
+        dateOfTest: "All date field should be filled",
+        reference: "Reference cannot be empty!"
     }
 
 
-    const checkValidity = (e)=>{        
+    const checkValidity = (e) => {
 
-        if(e.target.value.length == 0){
-            setIsValid({...isValid,[e.target.id]: {
-                status: true,
-                 message:errorMessages[e.target.id]
-            }});
-         }else{
-            setIsValid({...isValid,[e.target.id]: {status:false}});
-         }
+        if (e.target.value.length == 0) {
+            setIsValid({
+                ...isValid, [e.target.id]: {
+                    status: true,
+                    message: errorMessages[e.target.id]
+                }
+            });
+        } else {
+            setIsValid({ ...isValid, [e.target.id]: { status: false } });
+        }
     }
 
 
-    const onInputChange = (e)=>{        
+    const onInputChange = (e) => {
         checkValidity(e);
-        setPatientDetails({...patientDetails,[e.target.id]: e.target.value});
+        setPatientDetails({ ...patientDetails, [e.target.id]: e.target.value });
     }
 
-    const onSexAndInputChange = (e)=>{ 
+    const onSexAndInputChange = (e) => {
         const currentInputValue = patientDetails.sexAndAge;
         const currentInputValueLength = patientDetails.sexAndAge.length;
-        if(currentInputValueLength == 0){
-            setPatientDetails({...patientDetails,[e.target.id]: `${e.target.value.toUpperCase()} / `});    
-            return;        
-        }
-        if(e.target.value.length == 2){
-            console.log('e.target.value');
-            setPatientDetails({...patientDetails,[e.target.id]: `${currentInputValue} / ${e.target.value.slice(1)}`});
+        if (currentInputValueLength == 0) {
+            setPatientDetails({ ...patientDetails, [e.target.id]: `${e.target.value.toUpperCase()} / ` });
             return;
         }
-        if(e.target.value.length > 2 && e.target.value.length <= 4){
-            setPatientDetails({...patientDetails,[e.target.id]: currentInputValue[0]});
+        if (e.target.value.length == 2) {
+            setPatientDetails({ ...patientDetails, [e.target.id]: `${currentInputValue} / ${e.target.value.slice(1)}` });
             return;
         }
-        setPatientDetails({...patientDetails,[e.target.id]: e.target.value});
+        if (e.target.value.length > 2 && e.target.value.length <= 4) {
+            setPatientDetails({ ...patientDetails, [e.target.id]: currentInputValue[0] });
+            return;
+        }
+        setPatientDetails({ ...patientDetails, [e.target.id]: e.target.value });
     }
 
     return (
@@ -86,9 +87,9 @@ export default function PatientDetails({ ...restProps }) {
                     value={patientDetails.name}
                     placeholder="Enter Name"
                     id="name"
-                    error = {isValid.name.status}
-                    errorMessage = {isValid.name.message}
-                    onChange = {onInputChange}
+                    error={isValid.name.status}
+                    errorMessage={isValid.name.message}
+                    onChange={onInputChange}
                 />
                 <Inputfield
                     name="sex-age"
@@ -96,19 +97,19 @@ export default function PatientDetails({ ...restProps }) {
                     value={patientDetails.sexAndAge}
                     placeholder="Enter M or F / Age"
                     id="sexAndAge"
-                    error = {isValid.sexAndAge.status}
-                    errorMessage = {isValid.sexAndAge.message}
-                    onChange = {onSexAndInputChange}
+                    error={isValid.sexAndAge.status}
+                    errorMessage={isValid.sexAndAge.message}
+                    onChange={onSexAndInputChange}
                 />
                 <Inputfield
-                    type = 'date'
+                    type='date'
                     name="date-of-test"
                     label="Date Of Test"
                     value={patientDetails.dateOfTest}
                     id="dateOfTest"
                     error={isValid.dateOfTest.status}
-                    errorMessage = {isValid.dateOfTest.message}
-                    onChange = {onInputChange}
+                    errorMessage={isValid.dateOfTest.message}
+                    onChange={onInputChange}
                 />
                 <Inputfield
                     name="reference"
@@ -117,10 +118,10 @@ export default function PatientDetails({ ...restProps }) {
                     placeholder="Enter Referencee"
                     id="reference"
                     error={isValid.reference.status}
-                    errorMessage = {isValid.reference.message}
-                    onChange = {onInputChange}
+                    errorMessage={isValid.reference.message}
+                    onChange={onInputChange}
                 />
-                
+
             </form>
         </section>
     )

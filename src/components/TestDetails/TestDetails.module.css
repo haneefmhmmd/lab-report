@@ -2,12 +2,6 @@
     width: 100%;
 }
 
-@media only screen and (max-width: 760px){
-    .tableWrapper{
-        overflow-x: auto;
-    }
-}
-
 .table {
     width: 100%;
     table-layout: fixed;
@@ -78,21 +72,20 @@
     width: 180px;
 }
 
-.row{
+.row {
     position: relative;
 }
 
-.tableDeleteBtn{
+.tableDeleteBtn {
     position: absolute;
     top: 50%;
     right: -40px;
     transform: translateY(-50%);
-    display: none;
     vertical-align: middle;
     z-index: 1;
 }
 
-.row::after{
+.row::after {
     content: '';
     position: absolute;
     right: -40px;
@@ -101,8 +94,23 @@
     height: 100%;
 }
 
-.row:hover .tableDeleteBtn{
-    display: flex;
+@media only screen and (min-width: 1080px) {
+    .tableDeleteBtn {
+        display: none;
+    }
+
+    .row:hover .tableDeleteBtn {
+        display: flex;
+    }
+}
+
+
+
+@media only screen and (max-width: 1079px) {
+    .tableWrapper {
+        overflow-x: auto;
+    }
+
 }
 
 /* .table input {
