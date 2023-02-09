@@ -58,7 +58,7 @@ export default function TestDetails({ tests, addBtnClickHandler, deleteTestBtnHa
                     </thead>
                     <tbody>
                         {
-                            tests.length == 0 ? <NoTestAvailable /> : tests.map((test) => (<TestDetail id={test.id} name={test.name} value={test.value} unit={test.unit} referenceValue={test.referenceValue} key={uuidv4()} />))
+                            tests.length === 0 ? <NoTestAvailable /> : tests.map((test) => (<TestDetail id={test.id} name={test.name} value={test.value} unit={test.unit} referenceValue={test.referenceValue} key={uuidv4()} />))
                         }
                     </tbody>
                 </table>

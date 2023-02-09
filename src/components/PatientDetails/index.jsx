@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Inputfield from "../Inputfield";
 
 import styles from './Patient.module.css';
 
 export default function PatientDetails({patientDetails,setPatientDetails, ...restProps }) {
-
-    // const [patientDetails, setPatientDetails] = useState({
-    //     name: "",
-    //     sexAndAge: "",
-    //     dateOfTest: new Date().toISOString().split('T')[0],
-    //     reference: ""
-    // });
 
     const [isValid, setIsValid] = useState({
         name: {
@@ -41,7 +34,7 @@ export default function PatientDetails({patientDetails,setPatientDetails, ...res
 
     const checkValidity = (e) => {
 
-        if (e.target.value.length == 0) {
+        if (e.target.value.length === 0) {
             setIsValid({
                 ...isValid, [e.target.id]: {
                     status: true,
@@ -63,11 +56,11 @@ export default function PatientDetails({patientDetails,setPatientDetails, ...res
         const currentInputValue = patientDetails.sexAndAge;
         const currentInputValueLength = patientDetails.sexAndAge.length;
         checkValidity(e);
-        if (currentInputValueLength == 0) {
+        if (currentInputValueLength === 0) {
             setPatientDetails({ ...patientDetails, [e.target.id]: `${e.target.value.toUpperCase()} / ` });
             return;
         }
-        if (e.target.value.length == 2) {
+        if (e.target.value.length === 2) {
             setPatientDetails({ ...patientDetails, [e.target.id]: `${currentInputValue} / ${e.target.value.slice(1)}` });
             return;
         }
