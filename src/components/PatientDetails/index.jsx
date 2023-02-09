@@ -3,14 +3,14 @@ import Inputfield from "../Inputfield";
 
 import styles from './Patient.module.css';
 
-export default function PatientDetails({ ...restProps }) {
+export default function PatientDetails({patientDetails,setPatientDetails, ...restProps }) {
 
-    const [patientDetails, setPatientDetails] = useState({
-        name: "",
-        sexAndAge: "",
-        dateOfTest: new Date().toISOString().split('T')[0],
-        reference: ""
-    });
+    // const [patientDetails, setPatientDetails] = useState({
+    //     name: "",
+    //     sexAndAge: "",
+    //     dateOfTest: new Date().toISOString().split('T')[0],
+    //     reference: ""
+    // });
 
     const [isValid, setIsValid] = useState({
         name: {

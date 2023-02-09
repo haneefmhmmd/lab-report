@@ -26,6 +26,13 @@ function App() {
   const [testData, setTestData] = useState([]);
   const [selectedTests, setSelectedTests] = useState([])
   const [isAddTestModalOpen, setIsAddTestModalOpen] = useState(false);
+  const [patientDetails, setPatientDetails] = useState({
+    name: "",
+    sexAndAge: "",
+    dateOfTest: new Date().toISOString().split('T')[0],
+    reference: ""
+});
+
   async function fetchTestData() {
     const fetchResult = await fetch('http://localhost:3000/LabData.json');
     const response = await fetchResult.json();
@@ -44,6 +51,11 @@ function App() {
     const updatedTestData = testData.filter((test) => (test.isSelected));
     setSelectedTests(updatedTestData);
   }, [testData])
+
+
+  const updatePatientDetails =(updatedpatientDetail)=>{
+    setPatientDetails(updatedpatientDetail);
+  }
 
   const addTestBtnHandler = (testsSelected) => {
     setSelectedTests(testsSelected);
@@ -75,7 +87,7 @@ function App() {
         >
           <h2 className="text--lg fw-700 text-center">Create Report</h2>
         </FlexBox>
-        <PatientDetails style={{ '--mb': 10 }} />
+        <PatientDetails style={{ '--mb': 10 }} patientDetails={patientDetails} setPatientDetails = {updatePatientDetails}/>
         <TestDetails tests={selectedTests} addBtnClickHandler={openAddTestModal} deleteTestBtnHandler={removedTest} />
       </main>
       <Footer addBtnClickHandler={openAddTestModal} />
