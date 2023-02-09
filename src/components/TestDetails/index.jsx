@@ -21,7 +21,7 @@ export default function TestDetails({ tests, addBtnClickHandler, deleteTestBtnHa
         }
 
         return (
-            <tr className={style.row} data-selected-test-id={id}>
+            <tr className={style.row}>
                 <td>
                     {name}
                 </td>

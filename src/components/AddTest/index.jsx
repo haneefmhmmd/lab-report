@@ -16,9 +16,9 @@ export default function AddTest({
     setTests(data);
   }, [data]);
 
-  const onTestClickHandler = (e) => {
+  const onTestClickHandler = (id) => {
     const updatedTestList = tests.map((test) => {
-      if (test.id === e.currentTarget.getAttribute("data-test-id")) {
+      if (test.id === id) {
         test.isSelected = !test.isSelected;
       }
       return test;
@@ -38,8 +38,7 @@ export default function AddTest({
   testList.map((test) => (
       <li
         className={`${style.test} ${test.isSelected ? style.selected : ""}`}
-        onClick={onTestClickHandler}
-        data-test-id={test.id}
+        onClick={()=> onTestClickHandler(test.id)}
         key={uuidv4()}
       >
         <span>{test.name}</span>
