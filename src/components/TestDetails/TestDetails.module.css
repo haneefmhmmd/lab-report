@@ -54,6 +54,7 @@
 
 .table td {
     background-color: var(--quaternary-color);
+    vertical-align: middle;
 }
 
 .headerRow th:first-child {
