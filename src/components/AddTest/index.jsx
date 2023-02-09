@@ -3,7 +3,7 @@ import Button, { ButtonLabel } from "../Button";
 import Checkbox from "../CheckBox";
 import Inputfield from "../Inputfield";
 import style from "./AddTest.module.css";
-
+import { v4 as uuidv4 } from 'uuid';
 export default function AddTest({
   data,
   addTestBtnHandler,
@@ -40,7 +40,7 @@ export default function AddTest({
         className={`${style.test} ${test.isSelected ? style.selected : ""}`}
         onClick={onTestClickHandler}
         data-test-id={test.id}
-        key={test.id}
+        key={uuidv4()}
       >
         <span>{test.name}</span>
         <Checkbox checked={test.isSelected} />
@@ -48,7 +48,7 @@ export default function AddTest({
     ));
 
   const FilteredTestList = () => {
-    if (filteredList.length == 0) {
+    if (filteredList.length === 0) {
       return <li>No test with the given name found!</li>;
     }
     return <TestList testList={filteredList} />;
