@@ -77,12 +77,12 @@
       "id": "12",
       "name": "Potassium",
       "unit": "mmol/L",
-      "referenceValue": {
-        "newBorn": "3.7-5.9 mmol/L ",
-        "infant": "4.1-5.3 mmol/L",
-        "child": "3.4-4.7 mmol/L",
-        "adult": "3.5-5.1 mmol/L"
-      }
+      "referenceValue": [
+        "newBorn : 3.7-5.9 mmol/L ",
+        "infant : 4.1-5.3 mmol/L",
+        "child : 3.4-4.7 mmol/L",
+        "adult : 3.5-5.1 mmol/L"
+      ]
     },
     {
       "id": "13",
