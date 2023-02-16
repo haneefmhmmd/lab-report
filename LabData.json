@@ -1,0 +1,112 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "Activated partial thromboplastin time (aPTT)",
+      "unit": "sec",
+      "referenceValue": "25-40 sec"
+    },
+    {
+      "id": "2",
+      "name": "Albumin (serum)",
+      "unit": "g/L",
+      "referenceValue": "35-50 g/L"
+    },
+    {
+      "id": "3",
+      "name": "Amylase (serum)",
+      "unit": "IU/L",
+      "referenceValue": "25-125 IU/L"
+    },
+    {
+      "id": "4",
+      "name": "Bicarbonate (HCO3) (serum)",
+      "unit": "mmol/L",
+      "referenceValue": "23-29 mmol/L"
+    },
+    {
+      "id": "5",
+      "name": "Bilirubin (serum)*",
+      "unit": "μmol/L",
+      "referenceValue": "0-5 μmol/L"
+    },
+    {
+      "id": "6",
+      "name": "Bleeding time",
+      "unit": "min",
+      "referenceValue": "< 5 min"
+    },
+    {
+      "id": "7",
+      "name": "Calcium (urine)",
+      "unit": "mmol/d",
+      "referenceValue": "< 6.2 mmol/d"
+    },
+    {
+      "id": "8",
+      "name": "Glucose (fasting) (plasma or serum)",
+      "unit": "mmol/L",
+      "referenceValue": "3.9-6.1 mmol/L"
+    },
+    {
+      "id": "9",
+      "name": "Hemoglobin (Hb)",
+      "referenceValue": [
+        "newBorn : 0.49-0.54",
+        "children : 0.35-0.49",
+        "male : 0.40-0.54",
+        "female : 0.37-0.47"
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Iron (serum)",
+      "unit": "μmol/L",
+      "referenceValue": [
+        "male : 13-31 μmol/L",
+        "female : 5-29 μmol/L"
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Oxygen (arterial saturation)",
+      "unit": "%",
+      "referenceValue": "94-99%"
+    },
+    {
+      "id": "12",
+      "name": "Potassium",
+      "unit": "mmol/L",
+      "referenceValue": [
+        "newBorn : 3.7-5.9 mmol/L ",
+        "infant : 4.1-5.3 mmol/L",
+        "child : 3.4-4.7 mmol/L",
+        "adult : 3.5-5.1 mmol/L"
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Protein (urine)",
+      "unit": "mg/d",
+      "referenceValue": "10-150 mg/d"
+    },
+    {
+      "id": "14",
+      "name": "Thyroxine, total (T4) (serum)**",
+      "unit": "",
+      "referenceValue": "66-155 nmol/L"
+    },
+    {
+      "id": "15",
+      "name": "Urea (plasma or serum)",
+      "unit": "mmol/L",
+      "referenceValue": "2.9-8.2 mmol/L"
+    },
+    {
+      "id": "16",
+      "name": "Uric acid (serum) (enzymatic)",
+      "unit": "μmol/L",
+      "referenceValue": "120-420 μmol/L"
+    }
+  ]
+}
