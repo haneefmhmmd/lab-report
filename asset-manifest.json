@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/lab-report/static/css/main.e6e781df.css",
+    "main.css": "/lab-report/static/css/main.20a29adb.css",
     "main.js": "/lab-report/static/js/main.f47c4c24.js",
     "index.html": "/lab-report/index.html",
-    "main.e6e781df.css.map": "/lab-report/static/css/main.e6e781df.css.map",
+    "main.20a29adb.css.map": "/lab-report/static/css/main.20a29adb.css.map",
     "main.f47c4c24.js.map": "/lab-report/static/js/main.f47c4c24.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6e781df.css",
+    "static/css/main.20a29adb.css",
     "static/js/main.f47c4c24.js"
   ]
 }
