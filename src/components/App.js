@@ -98,9 +98,9 @@ function App() {
   return (
     <div className="App">
       <Header title="Laboratory Name" />
-      <main className="container main" style={{ "--mt": 10, "--mb": 28 }}>
+      <main className="container main" style={{ "--mt": 10, "--mb": 10 }}>
         <FlexBox as="header" align="center" style={{ "--mb": 10 }}>
-          {currentStep == 2 && (
+          {currentStep === 2 && (
             <Button
               iconPlacement="only"
               style={{ "--mr": 5 }}
@@ -121,7 +121,7 @@ function App() {
             </Button>
           )}
           <h2 className="text--lg fw-700 text-center">
-            {currentStep == 2 ? "Generate Report" : "Create Report"}
+            {currentStep === 2 ? "Generate Report" : "Create Report"}
           </h2>
         </FlexBox>
         {currentStep === 1 && (
@@ -145,10 +145,12 @@ function App() {
           />
         )}
       </main>
-      <Footer
-        addBtnClickHandler={openAddTestModal}
-        continueBtnHandler={continueBtnHandler}
-      />
+      {currentStep !== 2 && (
+        <Footer
+          addBtnClickHandler={openAddTestModal}
+          continueBtnHandler={continueBtnHandler}
+        />
+      )}
       {isAddTestModalOpen && (
         <AddTest
           data={testData}

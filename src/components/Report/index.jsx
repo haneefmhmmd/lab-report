@@ -1,4 +1,3 @@
-import styles from "./Report.module.css";
 import {
   PDFViewer,
   Page,
@@ -8,20 +7,8 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
-import { useEffect } from "react";
 
 export default function Report({ patientDetails, selectedTests }) {
-  console.log(patientDetails, selectedTests);
-
-  useEffect(() => {
-    console.log(
-      window.innerHeight -
-        (document.getElementById("header").offsetHeight +
-          document.getElementById("footer").offsetHeight -
-          100)
-    );
-  });
-
   Font.register({
     family: "Ubuntu",
     src: "https://fonts.gstatic.com/s/ubuntu/v20/4iCs6KVjbNBYlgoKcg72nU6AF7xm.woff2",
@@ -110,19 +97,27 @@ export default function Report({ patientDetails, selectedTests }) {
 
   return (
     <PDFViewer style={styles.viewer}>
-      <Document>
+      <Document
+        title={`${patientDetails.name.split(" ").join("")}_${
+          patientDetails.dateOfTest
+        }`}
+      >
         <Page size="A4" style={styles.page}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Laboratory Name</Text>
           </View>
           <View style={styles.patientDetails}>
             <View>
-              <Text>Name: John Doe</Text>
-              <Text style={styles["mt-1"]}>Date of Test: 09/02/2023</Text>
+              <Text>Name: {patientDetails.name}</Text>
+              <Text style={styles["mt-1"]}>
+                Date of Test: {patientDetails.dateOfTest}
+              </Text>
             </View>
             <View>
-              <Text>Sex/ Age: M / 24</Text>
-              <Text style={styles["mt-1"]}>Reference: Lorem Ipsum</Text>
+              <Text>Sex/ Age: {patientDetails.sexAndAge}</Text>
+              <Text style={styles["mt-1"]}>
+                Reference: {patientDetails.reference}
+              </Text>
             </View>
           </View>
           <View style={styles.report}>
