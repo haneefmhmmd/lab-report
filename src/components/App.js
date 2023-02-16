@@ -7,6 +7,7 @@ import FlexBox from "./FlexBox";
 import { useEffect, useState } from "react";
 import Report from "./Report";
 import { data as LabData } from "../data";
+import Button from "./Button";
 
 const constants = {
   stepOne: "ADD_PATIENT_DETAILS",
@@ -98,16 +99,33 @@ function App() {
     <div className="App">
       <Header title="Laboratory Name" />
       <main className="container main" style={{ "--mt": 10, "--mb": 28 }}>
+        <FlexBox as="header" align="center" style={{ "--mb": 10 }}>
+          {currentStep == 2 && (
+            <Button
+              iconPlacement="only"
+              style={{ "--mr": 5 }}
+              onClick={() => {
+                setCurrentStep(currentStep - 1);
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  opacity="0.9"
+                  d="M15.5 5L8.5 12L15.5 19"
+                  stroke="#FFFFFF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </Button>
+          )}
+          <h2 className="text--lg fw-700 text-center">
+            {currentStep == 2 ? "Generate Report" : "Create Report"}
+          </h2>
+        </FlexBox>
         {currentStep === 1 && (
           <>
-            <FlexBox
-              as="header"
-              justify="between"
-              align="center"
-              style={{ "--mb": 10 }}
-            >
-              <h2 className="text--lg fw-700 text-center">Create Report</h2>
-            </FlexBox>
             <PatientDetails
               style={{ "--mb": 10 }}
               patientDetails={patientDetails}
