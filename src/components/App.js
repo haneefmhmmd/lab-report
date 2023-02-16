@@ -6,6 +6,7 @@ import AddTest from "./AddTest";
 import FlexBox from "./FlexBox";
 import { useEffect, useState } from "react";
 import Report from "./Report";
+import { data as LabData } from "../data";
 
 const constants = {
   stepOne: "ADD_PATIENT_DETAILS",
@@ -35,9 +36,10 @@ function App() {
   const [isAddTestModalOpen, setIsAddTestModalOpen] = useState(false);
 
   async function fetchTestData() {
-    const fetchResult = await fetch("http://localhost:3000/LabData.json");
-    const response = await fetchResult.json();
-    const data = response.data;
+    // const fetchResult = await fetch("/LabData.json");
+    // const response = await fetchResult.json();
+    // const data = response.data;
+    const data = LabData;
     console.log("data received");
     const testData = data.map((test) => ({
       ...test,
@@ -65,9 +67,9 @@ function App() {
     setIsAddTestModalOpen(false);
   };
 
-  const continueBtnHandler = ()=>{
+  const continueBtnHandler = () => {
     setCurrentStep(2);
-  }
+  };
 
   const openAddTestModal = () => {
     setIsAddTestModalOpen(true);
@@ -108,11 +110,17 @@ function App() {
             />
           </>
         )}
-        {
-          currentStep === 2 && <Report patientDetails={patientDetails} selectedTests= {selectedTests} />
-        }
+        {currentStep === 2 && (
+          <Report
+            patientDetails={patientDetails}
+            selectedTests={selectedTests}
+          />
+        )}
       </main>
-      <Footer addBtnClickHandler={openAddTestModal} continueBtnHandler={continueBtnHandler} />
+      <Footer
+        addBtnClickHandler={openAddTestModal}
+        continueBtnHandler={continueBtnHandler}
+      />
       {isAddTestModalOpen && (
         <AddTest
           data={testData}
