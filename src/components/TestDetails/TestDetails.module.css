@@ -114,13 +114,18 @@
 
 }
 
-/* .table input {
+td.hasInput{
+    padding: 0;
+}
+
+.table input {
     width: 100%;
     border: none;
     outline: none;
     background-color: transparent;
     font-size: 14px;
     color: var(--primary-color);
+    padding: 16px;
 }
 
 .table input::placeholder {
@@ -128,7 +133,7 @@
     opacity: 0.6;
 }
 
-.dropdown {
+/* .dropdown {
     width: 100%;
     position: absolute;
     top: 100%;

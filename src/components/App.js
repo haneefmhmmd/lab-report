@@ -84,6 +84,16 @@ function App() {
     setTestData(updatedTestData);
   };
 
+  const updateSelectedTestValue = (id, value) => {
+    const updatedSelectedTest = selectedTests.map((test) => {
+      if (test.id === id) {
+        test.value = value;
+      }
+      return test;
+    });
+    setSelectedTests(updatedSelectedTest);
+  };
+
   return (
     <div className="App">
       <Header title="Laboratory Name" />
@@ -105,7 +115,7 @@ function App() {
             />
             <TestDetails
               tests={selectedTests}
-              addBtnClickHandler={openAddTestModal}
+              updateSelectedTestValueHandler={updateSelectedTestValue}
               deleteTestBtnHandler={removedTest}
             />
           </>
