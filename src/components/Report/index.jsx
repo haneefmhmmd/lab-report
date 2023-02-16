@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
-
+import { v4 as uuidv4 } from "uuid";
 export default function Report({ patientDetails, selectedTests }) {
   Font.register({
     family: "Ubuntu",
@@ -90,9 +90,6 @@ export default function Report({ patientDetails, selectedTests }) {
       fontSize: 16,
       padding: "8px",
     },
-    ["mt-1"]: {
-      marginTop: "8px",
-    },
   });
 
   return (
@@ -133,7 +130,7 @@ export default function Report({ patientDetails, selectedTests }) {
               </View>
             </View>
             {selectedTests.map((test) => (
-              <View style={styles.row}>
+              <View style={styles.row} key={uuidv4()}>
                 <View style={styles.testNameCol}>
                   <Text>{test.name}</Text>
                 </View>
