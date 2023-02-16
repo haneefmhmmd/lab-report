@@ -92,7 +92,7 @@
 
     .modal {
         height: 100vh;
-        max-height: calc(100vh - 40px);
+        max-height: calc(100% - 40px);
         padding: 20px;
         display: flex;
         flex-direction: column;
