@@ -6,7 +6,7 @@ import AddTest from "./AddTest";
 import FlexBox from "./FlexBox";
 import { useEffect, useState } from "react";
 import Report from "./Report";
-import { data as LabData } from "../data";
+import LabData from "../data";
 import Button from "./Button";
 
 const constants = {
