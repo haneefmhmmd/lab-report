@@ -1,44 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import Button, { ButtonLabel } from "../Button";
 import Checkbox from "../CheckBox";
 import Inputfield from "../Inputfield";
 import style from "./AddTest.module.css";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { LabContext, LabDispatchContext } from "../../context/LabContext";
 export default function AddTest({
   data,
   addTestBtnHandler,
   closeAddTestModal,
 }) {
-  const [tests, setTests] = useState([]);
   const [seachText, setSearchText] = useState("");
-  const [filteredList, setFilteredList] = useState([]);
-  useEffect(() => {
-    setTests(data);
-  }, [data]);
-
+  const { tests } = useContext(LabContext);
+  const dispatch = useContext(LabDispatchContext);
   const onTestClickHandler = (id) => {
-    const updatedTestList = tests.map((test) => {
-      if (test.id === id) {
-        test.isSelected = !test.isSelected;
-      }
-      return test;
+    dispatch({
+      type: "selectTest",
+      payload: id,
     });
-    setTests(updatedTestList);
   };
 
   const onSearchInputChange = (e) => {
     setSearchText(e.target.value);
-    const filteredList = tests.filter((test) =>
-      test.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setFilteredList(filteredList);
   };
 
   const TestList = ({ testList }) =>
-  testList.map((test) => (
+    testList.map((test) => (
       <li
         className={`${style.test} ${test.isSelected ? style.selected : ""}`}
-        onClick={()=> onTestClickHandler(test.id)}
+        onClick={() => onTestClickHandler(test.id)}
         key={uuidv4()}
       >
         <span>{test.name}</span>
@@ -47,6 +37,9 @@ export default function AddTest({
     ));
 
   const FilteredTestList = () => {
+    const filteredList = tests.filter((test) =>
+      test.name.toLowerCase().includes(seachText.toLowerCase())
+    );
     if (filteredList.length === 0) {
       return <li>No test with the given name found!</li>;
     }
@@ -85,9 +78,11 @@ export default function AddTest({
             onChange={onSearchInputChange}
           />
           <ul className={style.testList}>
-            {
-              seachText.length === 0 ? <TestList testList={tests} /> : <FilteredTestList />
-            }
+            {seachText.length === 0 ? (
+              <TestList testList={tests} />
+            ) : (
+              <FilteredTestList />
+            )}
           </ul>
         </div>
         <footer className={style.modalFoot}>
