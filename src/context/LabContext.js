@@ -36,6 +36,13 @@ const reducer = function (state, action) {
       return { ...state, selectedTests: action.payload };
     }
 
+    case "removeSelectedTests": {
+      const updatedSelectedTests = selectedTests.filter(
+        (test) => test.id !== action.payload
+      );
+      return { ...state, selectedTests: updatedSelectedTests };
+    }
+
     case "toggleModal": {
       return { ...state, isModalOpen: action.payload };
     }
