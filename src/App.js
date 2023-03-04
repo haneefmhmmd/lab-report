@@ -1,13 +1,14 @@
-import Header from "./Header";
-import PatientDetails from "./PatientDetails";
-import Footer from "./Footer";
-import TestDetails from "./TestDetails";
-import AddTest from "./AddTest";
-import FlexBox from "./FlexBox";
-import { useEffect, useState } from "react";
-import Report from "./Report";
-import LabData from "../data";
-import Button from "./Button";
+import Header from "./components/Header";
+import PatientDetails from "./components/PatientDetails";
+import Footer from "./components/Footer";
+import TestDetails from "./components/TestDetails";
+import AddTest from "./components/AddTest";
+import FlexBox from "./components/FlexBox";
+import { useContext, useEffect, useState } from "react";
+import Report from "./components/Report";
+import LabData from "./data/data";
+import Button from "./components/Button";
+import { LabContext, LabDispatchContext } from "./context/LabContext";
 
 const constants = {
   stepOne: "ADD_PATIENT_DETAILS",
@@ -35,6 +36,8 @@ function App() {
     reference: "",
   });
   const [isAddTestModalOpen, setIsAddTestModalOpen] = useState(false);
+
+  const data = useContext(LabContext);
 
   async function fetchTestData() {
     // const fetchResult = await fetch("/LabData.json");
