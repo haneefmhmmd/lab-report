@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../Button";
 import { v4 as uuidv4 } from "uuid";
 
 import style from "./TestDetails.module.css";
+import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
-export default function TestDetails({
-  tests,
-  updateSelectedTestValueHandler,
-  deleteTestBtnHandler,
-  ...restProps
-}) {
+export default function TestDetails({ ...restProps }) {
+  const { selectedTests: tests } = useContext(LabContext);
+  const dispatch = useContext(LabDispatchContext);
+
   const NoTestAvailable = () => (
     <tr>
       <td colSpan={4}>No Test Added!</td>
@@ -24,11 +23,18 @@ export default function TestDetails({
     };
 
     const onInputBlur = () => {
-      updateSelectedTestValueHandler(data.id, value);
+      dispatch({
+        type: "updateSelectedTestValue",
+        payload: {
+          id: data.id,
+          value,
+        },
+      });
     };
 
     const deleteBtnHandler = (id) => {
-      deleteTestBtnHandler(id);
+      dispatch({ type: "removeSelectedTests", payload: id });
+      dispatch({ type: "selectTest", payload: id });
     };
 
     return (

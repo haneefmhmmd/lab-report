@@ -7,8 +7,12 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
+import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
-export default function Report({ patientDetails, selectedTests }) {
+import { LabContext } from "../../context/LabContext";
+export default function Report() {
+  const { patientDetails, selectedTests } = useContext(LabContext);
+
   Font.register({
     family: "Ubuntu",
     src: "https://fonts.gstatic.com/s/ubuntu/v20/4iCs6KVjbNBYlgoKcg72nU6AF7xm.woff2",

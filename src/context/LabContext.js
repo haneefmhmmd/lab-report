@@ -37,7 +37,7 @@ const reducer = function (state, action) {
     }
 
     case "removeSelectedTests": {
-      const updatedSelectedTests = selectedTests.filter(
+      const updatedSelectedTests = state.selectedTests.filter(
         (test) => test.id !== action.payload
       );
       return { ...state, selectedTests: updatedSelectedTests };
@@ -55,6 +55,16 @@ const reducer = function (state, action) {
         return test;
       });
       return { ...state, tests: updatedTestList };
+    }
+
+    case "updateSelectedTestValue": {
+      const updatedSelectedTest = state.selectedTests.map((test) => {
+        if (test.id === action.payload.id) {
+          test.value = action.payload.value;
+        }
+        return test;
+      });
+      return { ...state, selectedTests: updatedSelectedTest };
     }
 
     default: {
