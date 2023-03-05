@@ -5,7 +5,7 @@ import Inputfield from "../Inputfield";
 import style from "./AddTest.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
-export default function AddTest({ closeAddTestModal }) {
+export default function AddTest() {
   const [seachText, setSearchText] = useState("");
   const { tests } = useContext(LabContext);
   const dispatch = useContext(LabDispatchContext);
@@ -42,12 +42,20 @@ export default function AddTest({ closeAddTestModal }) {
     return <TestList testList={filteredList} />;
   };
 
+  const closeAddTestModal = () => {
+    dispatch({
+      type: "toggleModal",
+      payload: false,
+    });
+  };
+
   const addBtnClickHandler = () => {
     const selectedTests = tests.filter((test) => test.isSelected);
     dispatch({
       type: "addSelectedTests",
       payload: selectedTests,
     });
+    closeAddTestModal();
   };
 
   return (

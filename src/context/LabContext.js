@@ -13,6 +13,7 @@ const initialData = {
   tests: labData.map((test) => ({ ...test, value: "", isSelected: false })),
   selectedTests: [],
   isModalOpen: false,
+  currentStep: 1,
 };
 
 export default function LabProvider({ children }) {
@@ -65,6 +66,10 @@ const reducer = function (state, action) {
         return test;
       });
       return { ...state, selectedTests: updatedSelectedTest };
+    }
+
+    case "updateCurrentStep": {
+      return { ...state, currentStep: action.payload };
     }
 
     default: {
