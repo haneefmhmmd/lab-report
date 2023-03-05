@@ -5,7 +5,7 @@ import Flexbox from "../FlexBox";
 
 export default function Footer() {
   const dispatch = useContext(LabDispatchContext);
-  const { currentStep } = useContext(LabContext);
+  const { currentStep, selectedTests } = useContext(LabContext);
   const addBtnClickHandler = () => {
     dispatch({
       type: "toggleModal",
@@ -14,6 +14,16 @@ export default function Footer() {
   };
 
   const continueBtnHandler = () => {
+    const inputEleInTestDetails =
+      document.getElementsByClassName("js-test-value");
+    const updatedSelectedList = selectedTests.map((test, index) => ({
+      ...test,
+      value: inputEleInTestDetails[index].value,
+    }));
+    dispatch({
+      type: "updateSelectedTestValue",
+      payload: updatedSelectedList,
+    });
     dispatch({
       type: "updateCurrentStep",
       payload: currentStep + 1,

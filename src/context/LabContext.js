@@ -59,13 +59,7 @@ const reducer = function (state, action) {
     }
 
     case "updateSelectedTestValue": {
-      const updatedSelectedTest = state.selectedTests.map((test) => {
-        if (test.id === action.payload.id) {
-          test.value = action.payload.value;
-        }
-        return test;
-      });
-      return { ...state, selectedTests: updatedSelectedTest };
+      return { ...state, selectedTests: action.payload };
     }
 
     case "updateCurrentStep": {

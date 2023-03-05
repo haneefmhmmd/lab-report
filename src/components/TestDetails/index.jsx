@@ -22,16 +22,6 @@ export default function TestDetails({ ...restProps }) {
       setValue(e.target.value);
     };
 
-    const onInputBlur = () => {
-      dispatch({
-        type: "updateSelectedTestValue",
-        payload: {
-          id: data.id,
-          value,
-        },
-      });
-    };
-
     const deleteBtnHandler = (id) => {
       dispatch({ type: "removeSelectedTests", payload: id });
       dispatch({ type: "selectTest", payload: id });
@@ -43,11 +33,10 @@ export default function TestDetails({ ...restProps }) {
         <td className={style.hasInput}>
           <input
             type="text"
-            id="test-value"
+            className="js-test-value"
             placeholder="Enter value"
             value={value}
             onChange={onInputChange}
-            onBlur={onInputBlur}
           />
         </td>
         <td>{data.unit}</td>

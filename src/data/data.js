@@ -131,7 +131,7 @@ const data = [
     testType: [],
     unit: "",
     referenceValue:
-      "NORMAL : 4 – 6 %,GOOD CONTROL : 6 – 7 %,FAIR CONTROL : 7 – 8 %,POOR CONTROL : MORE THAN 8 %",
+      "NORMAL : 4 – 6 %, GOOD CONTROL : 6 – 7 %, FAIR CONTROL : 7 – 8 %, POOR CONTROL : MORE THAN 8 %",
   },
   {
     id: 20,
