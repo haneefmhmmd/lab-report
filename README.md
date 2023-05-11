@@ -3,7 +3,7 @@
 The Lab Report Generator is an application designed to simplify the process of creating laboratory reports for mid-tier pathology testing laboratories. These labs often rely on manual methods such as Word or Excel to create their reports, which can be time-consuming and prone to errors. This application provides an efficient and user-friendly way to generate professional-looking lab reports.
 
 ## Hosting
-This project is hosted at https://haneefmhmmd.github.io/lab-report/.
+This project is hosted at <a href="https://haneefmhmmd.github.io/lab-report/" target="_blank">https://haneefmhmmd.github.io/lab-report</a>.
 
 ## Design Link
 https://www.figma.com/file/n9mNXrsqmUcYyKCSwGPSNt/Lab-Test-Report-App---Variant-3?t=WURnL5LzITakLwha-0
