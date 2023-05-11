@@ -8,6 +8,10 @@ https://www.figma.com/file/n9mNXrsqmUcYyKCSwGPSNt/Lab-Test-Report-App---Variant-
 ## Preview Image of Design
 <img src="https://github.com/haneefmhmmd/lab-report/blob/master/project-images/report-dashboard.png" alt="Image of the first page of lab report app" title="Optional title">
 
+<img src="https://github.com/haneefmhmmd/lab-report/blob/master/project-images/Add-test.png" alt="Image of the add test options lab report app">
+
+<img src="https://github.com/haneefmhmmd/lab-report/blob/master/project-images/report-page.png" alt="Image of the generated report page of lab report app">
+
 
 ## Features:
 1. Report creation: Users will be able to create lab reports by inputting data into a form.
