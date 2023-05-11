@@ -5,6 +5,10 @@ The Lab Report Generator is an application designed to simplify the process of c
 ## Design Link
 https://www.figma.com/file/n9mNXrsqmUcYyKCSwGPSNt/Lab-Test-Report-App---Variant-3?t=WURnL5LzITakLwha-0
 
+## Preview Image of Design
+<img src="https://github.com/haneefmhmmd/lab-report/blob/master/project-images/report-dashboard.png" alt="Image of the first page of lab report app" title="Optional title">
+
+
 ## Features:
 1. Report creation: Users will be able to create lab reports by inputting data into a form.
 2. Download reports: Once the laboratory report is generated, users can easily download it in a PDF format for printing or electronic transmission.
