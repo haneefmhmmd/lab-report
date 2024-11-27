@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
-        <div className="card shadow-sm p-3 col-md-6">
+        <div className="card shadow-sm p-3 col-md-4">
           <div className="card-body">
             <h2 className="h4 text-center">Login</h2>
             <h3 className="fs-6 fw-normal text-secondary text-center m-0">
