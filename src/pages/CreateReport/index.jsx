@@ -1,14 +1,14 @@
-import Header from "./components/Header";
-import PatientDetails from "./components/PatientDetails";
-import Footer from "./components/Footer";
-import TestDetails from "./components/TestDetails";
-import AddTest from "./components/AddTest";
-import FlexBox from "./components/FlexBox";
 import { useContext } from "react";
-import Report from "./components/Report";
+import AddTest from "../../components/AddTest";
+import FlexBox from "../../components/FlexBox";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import PatientDetails from "../../components/PatientDetails";
+import Report from "../../components/Report";
+import TestDetails from "../../components/TestDetails";
 
-import Button from "./components/Button";
-import { LabContext, LabDispatchContext } from "./context/LabContext";
+import Button from "../../components/Button";
+import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 function App() {
   const { isModalOpen, currentStep } = useContext(LabContext);

@@ -4,6 +4,8 @@ export const LabContext = createContext(null);
 export const LabDispatchContext = createContext(null);
 const initialData = {
   labName: "Laboratory",
+  isLoggedIn: false,
+  user: null,
   patientDetails: {
     name: "",
     sexAndAge: "",
@@ -29,6 +31,14 @@ export default function LabProvider({ children }) {
 
 const reducer = function (state, action) {
   switch (action.type) {
+    case "login": {
+      return { ...state, isLoggedIn: true, user: action.payload };
+    }
+
+    case "logout": {
+      return { ...state, isLoggedIn: false, user: null };
+    }
+
     case "updatePatientDetails": {
       return { ...state, patientDetails: action.payload };
     }
