@@ -23,7 +23,7 @@ const Header = () => {
           MedLab
         </Link>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+          <ul className="navbar-nav ms-auto align-items-center">
             {isLoggedIn ? (
               <>
                 <li className="nav-item">

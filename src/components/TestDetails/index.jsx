@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import Button from "../Button";
 import { v4 as uuidv4 } from "uuid";
+import Button from "../Button";
 
-import style from "./TestDetails.module.css";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
+import style from "./TestDetails.module.css";
 
 export default function TestDetails({ ...restProps }) {
   const { selectedTests: tests } = useContext(LabContext);
@@ -11,7 +11,7 @@ export default function TestDetails({ ...restProps }) {
 
   const NoTestAvailable = () => (
     <tr>
-      <td colSpan={4}>No Test Added!</td>
+      <td colSpan={5}>No Test Added!</td>
     </tr>
   );
 
@@ -28,7 +28,7 @@ export default function TestDetails({ ...restProps }) {
     };
 
     return (
-      <tr className={style.row}>
+      <tr className={style.mrow}>
         <td>{data.name}</td>
         <td className={style.hasInput}>
           <input
@@ -46,10 +46,12 @@ export default function TestDetails({ ...restProps }) {
                 <p key={uuidv4()}>{value}</p>
               ))
             : data.referenceValue}
+        </td>
+        <td>
           <Button
             size="md"
             iconPlacement="only"
-            className={style.tableDeleteBtn}
+            className={style.mtableDeleteBtn}
             onClick={() => deleteBtnHandler(data.id)}
           >
             <svg
@@ -77,14 +79,15 @@ export default function TestDetails({ ...restProps }) {
       <header style={{ "--mb": 10 }}>
         <h2 className="text--md">Test Details</h2>
       </header>
-      <article className={style.tableWrapper}>
-        <table className={style.table}>
-          <thead className={style.headerRow}>
+      <article className={style.mtableWrapper}>
+        <table className={style.mtable}>
+          <thead className={style.mheaderRow}>
             <tr>
               <th>Test</th>
               <th>Value</th>
               <th>Unit</th>
               <th>Normal Values</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>

@@ -2,7 +2,6 @@ import { useContext } from "react";
 import AddTest from "../../components/AddTest";
 import FlexBox from "../../components/FlexBox";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import PatientDetails from "../../components/PatientDetails";
 import Report from "../../components/Report";
 import TestDetails from "../../components/TestDetails";
@@ -16,7 +15,6 @@ function App() {
 
   return (
     <div className="App">
-      <Header title="Laboratory Name" />
       <main className="container main" style={{ "--mt": 10, "--mb": 10 }}>
         <FlexBox as="header" align="center" style={{ "--mb": 10 }}>
           {currentStep === 2 && (
