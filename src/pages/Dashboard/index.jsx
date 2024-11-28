@@ -4,7 +4,7 @@ import { API_END_POINT } from "../../constants";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 const Dashboard = () => {
-  const { labId, user } = useContext(LabContext);
+  const { labId } = useContext(LabContext);
   const dispatch = useContext(LabDispatchContext);
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +62,7 @@ const Dashboard = () => {
     };
 
     fetchReports();
-  }, [user]);
+  }, [labId]);
 
   // Delete a report
   const handleDelete = async () => {

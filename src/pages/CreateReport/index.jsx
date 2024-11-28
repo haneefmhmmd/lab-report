@@ -11,7 +11,7 @@ import Toast from "../../components/Toast";
 import { API_END_POINT } from "../../constants";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
-function CreateReportPage() {
+function CreateReportPage({ edit = false }) {
   const { labId, isModalOpen, currentStep, patientDetails, selectedTests } =
     useContext(LabContext);
   const dispatch = useContext(LabDispatchContext);
@@ -19,9 +19,10 @@ function CreateReportPage() {
   const { reportId } = useParams(); // Get reportId from the route
   const [toast, setToast] = useState(null); // Toast state
   const [loading, setLoading] = useState(!!reportId); // Show loading state for edit mode
-
+  const [showSave, setShowSave] = useState(true);
   // Fetch report details if editing
   useEffect(() => {
+    dispatch({ type: "clearFormData" });
     const fetchReport = async () => {
       if (!reportId) return;
 
@@ -109,6 +110,10 @@ function CreateReportPage() {
         return;
       }
 
+      if (!edit) {
+        setShowSave(false);
+      }
+
       setToast({
         message: reportId
           ? "Report updated successfully!"
@@ -153,14 +158,14 @@ function CreateReportPage() {
               </svg>
             </Button>
           )}
-          <h2 className="text--lg fw-700 text-center">
+          <h2 className="text--lg fw-700 text-center mb-0">
             {reportId
               ? "Edit Report"
               : currentStep === 2
               ? "Generate Report"
               : "Create Report"}
           </h2>
-          {currentStep === 2 && (
+          {currentStep === 2 && showSave && (
             <Button className="ml-auto" onClick={() => saveReport()}>
               <ButtonLabel label="Save" />
             </Button>

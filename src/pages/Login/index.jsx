@@ -41,7 +41,7 @@ const Login = () => {
         type: "login",
         payload: {
           labName: data.labName,
-          id: data.labId,
+          labId: data.labId,
         },
       });
 
