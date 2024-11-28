@@ -1,17 +1,17 @@
 import {
+  Document,
+  Font,
   PDFViewer,
   Page,
+  StyleSheet,
   Text,
   View,
-  Document,
-  StyleSheet,
-  Font,
 } from "@react-pdf/renderer";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { LabContext } from "../../context/LabContext";
 export default function Report() {
-  const { patientDetails, selectedTests } = useContext(LabContext);
+  const { patientDetails, selectedTests, labName } = useContext(LabContext);
 
   Font.register({
     family: "Ubuntu",
@@ -33,15 +33,20 @@ export default function Report() {
       },
     ],
   });
+  const viewerHeight = () => {
+    const header = document.getElementById("header");
+    const footer = document.getElementById("footer");
+
+    const headerHeight = header ? header.offsetHeight : 0;
+    const footerHeight = footer ? footer.offsetHeight : 0;
+
+    return window.innerHeight - (headerHeight + footerHeight + 100);
+  };
 
   const styles = StyleSheet.create({
     viewer: {
       width: "100%",
-      height:
-        window.innerHeight -
-        (document.getElementById("header").offsetHeight +
-          document.getElementById("footer").offsetHeight +
-          100),
+      height: viewerHeight(),
     },
     page: {
       padding: "20px 28px",
@@ -105,19 +110,17 @@ export default function Report() {
       >
         <Page size="A4" style={styles.page}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Laboratory Name</Text>
+            <Text style={styles.title}>{labName}</Text>
           </View>
           <View style={styles.patientDetails}>
             <View>
               <Text>Name: {patientDetails.name}</Text>
-              <Text style={styles["mt-1"]}>
-                Date of Test: {patientDetails.dateOfTest}
-              </Text>
+              <Text style={styles["mt-1"]}>Age: {patientDetails.age}</Text>
             </View>
             <View>
-              <Text>Sex/ Age: {patientDetails.sexAndAge}</Text>
+              <Text>Gender: {patientDetails.gender}</Text>
               <Text style={styles["mt-1"]}>
-                Reference: {patientDetails.reference}
+                Date of Test: {patientDetails.dateOfTest}
               </Text>
             </View>
           </View>

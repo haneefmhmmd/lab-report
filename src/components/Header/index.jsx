@@ -18,6 +18,7 @@ const Header = () => {
     <nav
       className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
       data-bs-theme="dark"
+      id="header"
     >
       <div className="container">
         <Link className="navbar-brand" to="/">

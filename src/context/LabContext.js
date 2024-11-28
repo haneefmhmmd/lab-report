@@ -9,9 +9,9 @@ const initialData = {
   labData: null,
   patientDetails: {
     name: "",
-    sexAndAge: "",
+    gender: "",
     dateOfTest: new Date().toISOString().split("T")[0],
-    reference: "",
+    age: "",
   },
   tests: labData.map((test) => ({ ...test, value: "", isSelected: false })),
   selectedTests: [],
@@ -80,6 +80,24 @@ const reducer = function (state, action) {
 
     case "updateCurrentStep": {
       return { ...state, currentStep: action.payload };
+    }
+
+    case "clearFormData": {
+      return {
+        ...state,
+        patientDetails: {
+          name: "",
+          gender: "",
+          dateOfTest: new Date().toISOString().split("T")[0],
+          age: "",
+        },
+        tests: labData.map((test) => ({
+          ...test,
+          value: "",
+          isSelected: false,
+        })),
+        selectedTests: [],
+      };
     }
 
     default: {

@@ -9,6 +9,7 @@ const Dashboard = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [deleteReportId, setDeleteReportId] = useState(null); // Report ID to delete
 
   // Fetch reports for the logged-in lab
   useEffect(() => {
@@ -52,6 +53,40 @@ const Dashboard = () => {
 
     fetchReports();
   }, [user]);
+
+  // Delete a report
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem("token")
+        ? localStorage.getItem("token")
+        : null;
+
+      const response = await fetch(
+        `${API_END_POINT}report/${labId}/${deleteReportId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message || "Failed to delete the report.");
+        return;
+      }
+
+      // Remove the deleted report from the list
+      setReports((prevReports) =>
+        prevReports.filter((report) => report.reportId !== deleteReportId)
+      );
+      setDeleteReportId(null); // Reset the deleteReportId
+    } catch (err) {
+      console.error("Error deleting report:", err);
+      setError("An unexpected error occurred while deleting the report.");
+    }
+  };
 
   return (
     <div className="container mt-4">
@@ -111,11 +146,9 @@ const Dashboard = () => {
                       </button>
                       <button
                         className="btn btn-sm btn-outline-danger"
-                        onClick={() =>
-                          alert(
-                            `Are you sure you want to delete ${report.reportId}?`
-                          )
-                        }
+                        onClick={() => setDeleteReportId(report.reportId)} // Show delete modal
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal"
                       >
                         Delete
                       </button>
@@ -126,8 +159,58 @@ const Dashboard = () => {
             </table>
           </div>
         ) : (
-          <p>No reports found. Click "Create New Report" to get started.</p>
+          <div className="alert alert-warning mt-3" role="alert">
+            No reports found. Click "Create New Report" to get started.
+          </div>
         )}
+      </div>
+
+      {/* Delete Confirmation Modal */}
+      <div
+        className="modal fade"
+        id="deleteModal"
+        tabIndex="-1"
+        aria-labelledby="deleteModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="deleteModalLabel">
+                Confirm Deletion
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete this report?
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => {
+                  handleDelete();
+                  document.getElementById("deleteModal").click(); // Close modal
+                }}
+                data-bs-dismiss="modal"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ export default function PatientDetails({ ...restProps }) {
       status: null,
       message: "",
     },
-    sexAndAge: {
+    gender: {
       status: null,
       message: "",
     },
@@ -20,7 +20,7 @@ export default function PatientDetails({ ...restProps }) {
       status: null,
       message: "",
     },
-    reference: {
+    age: {
       status: null,
       message: "",
     },
@@ -28,9 +28,9 @@ export default function PatientDetails({ ...restProps }) {
 
   const errorMessages = {
     name: "Name cannot be empty!",
-    sexAndAge: "Sex And Age cannot be empty!",
+    gender: "Gender cannot be empty!",
     dateOfTest: "All date field should be filled",
-    reference: "Reference cannot be empty!",
+    age: "Age cannot be empty!",
   };
 
   const checkValidity = (e) => {
@@ -88,14 +88,24 @@ export default function PatientDetails({ ...restProps }) {
           onChange={onInputChange}
         />
         <Inputfield
-          name="sex-age"
-          label="Sex/Age"
-          value={patientDetails.sexAndAge}
-          placeholder="Enter M or F / Age"
-          id="sexAndAge"
-          error={isValid.sexAndAge.status}
-          errorMessage={isValid.sexAndAge.message}
-          onChange={onSexAndInputChange}
+          name="gender"
+          label="Gender"
+          value={patientDetails.gender}
+          placeholder="Enter Gender"
+          id="gender"
+          error={isValid.gender.status}
+          errorMessage={isValid.gender.message}
+          onChange={onInputChange}
+        />
+        <Inputfield
+          name="age"
+          label="age"
+          value={patientDetails.age}
+          placeholder="Enter Age"
+          id="age"
+          error={isValid.age.status}
+          errorMessage={isValid.age.message}
+          onChange={onInputChange}
         />
         <Inputfield
           type="date"
@@ -105,16 +115,6 @@ export default function PatientDetails({ ...restProps }) {
           id="dateOfTest"
           error={isValid.dateOfTest.status}
           errorMessage={isValid.dateOfTest.message}
-          onChange={onInputChange}
-        />
-        <Inputfield
-          name="reference"
-          label="Reference"
-          value={patientDetails.reference}
-          placeholder="Enter Reference"
-          id="reference"
-          error={isValid.reference.status}
-          errorMessage={isValid.reference.message}
           onChange={onInputChange}
         />
       </form>
