@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_END_POINT } from "../../constants";
 import { LabDispatchContext } from "../../context/LabContext";
 
 const Login = () => {
@@ -13,7 +14,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5171/api/Login", {
+      const response = await fetch(`${API_END_POINT}Login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

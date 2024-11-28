@@ -37,7 +37,7 @@ const reducer = function (state, action) {
         ...state,
         isLoggedIn: true,
         labName: action.payload.labName,
-        labId: action.labId,
+        labId: action.payload.labId,
       };
     }
 

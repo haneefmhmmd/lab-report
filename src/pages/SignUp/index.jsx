@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { API_END_POINT } from "../../constants";
 const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ const SignUp = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5171/api/Registration", {
+      const response = await fetch(`${API_END_POINT}Registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

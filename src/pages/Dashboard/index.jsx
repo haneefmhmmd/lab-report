@@ -1,28 +1,62 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { LabContext } from "../../context/LabContext";
+
+import { API_END_POINT } from "../../constants";
 
 const Dashboard = () => {
-  const reports = [
-    {
-      id: "RPT12345",
-      patientName: "John Doe",
-      gender: "Male",
-      age: 34,
-      testDate: "2024-11-25",
-    },
-    {
-      id: "RPT12346",
-      patientName: "Jane Smith",
-      gender: "Female",
-      age: 28,
-      testDate: "2024-11-20",
-    },
-  ];
+  const { labId, user } = useContext(LabContext);
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch reports for the logged-in lab
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const token = localStorage.getItem("token")
+          ? localStorage.getItem("token")
+          : null;
+
+        if (!labId) {
+          setError("Lab ID not found. Please log in again.");
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch(`${API_END_POINT}report/${labId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          setError(errorData.message || "Failed to fetch reports.");
+          setLoading(false);
+          return;
+        }
+
+        const data = await response.json();
+        setReports(data);
+      } catch (err) {
+        console.error("Error fetching reports:", err);
+        setError("An unexpected error occurred.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReports();
+  }, [user]);
 
   return (
     <div className="container mt-4">
       {/* Section 1: Welcome Message and Create Report */}
-      <div className="d-flex flex-column flex-md-row justify-content-between mb-4 ">
+      <div className="d-flex flex-column flex-md-row justify-content-between mb-4">
         <div className="col-md-6">
           <h1 className="fs-3 fw-bold">Welcome to MedLab Dashboard</h1>
           <p className="mt-1 lh-sm text-secondary">
@@ -40,23 +74,30 @@ const Dashboard = () => {
       {/* Section 2: Reports Table */}
       <div>
         <h3 className="fs-5 fw-bold">Reports List</h3>
-        <div className="table-responsive">
-          <table className="table table-hover align-middle mt-3">
-            <thead className="table-primary">
-              <tr>
-                <th>Report ID</th>
-                <th>Patient Name</th>
-                <th>Gender</th>
-                <th>Age</th>
-                <th>Test Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody className="table-group-divider">
-              {reports.length > 0 ? (
-                reports.map((report) => (
-                  <tr key={report.id}>
-                    <td>{report.id}</td>
+
+        {loading ? (
+          <p>Loading reports...</p>
+        ) : error ? (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        ) : reports.length > 0 ? (
+          <div className="table-responsive">
+            <table className="table table-hover align-middle mt-3">
+              <thead className="table-primary">
+                <tr>
+                  <th>Report ID</th>
+                  <th>Patient Name</th>
+                  <th>Gender</th>
+                  <th>Age</th>
+                  <th>Test Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody className="table-group-divider">
+                {reports.map((report) => (
+                  <tr key={report.reportId}>
+                    <td>{report.reportId}</td>
                     <td>{report.patientName}</td>
                     <td>{report.gender}</td>
                     <td>{report.age}</td>
@@ -64,31 +105,29 @@ const Dashboard = () => {
                     <td>
                       <button
                         className="btn btn-sm btn-outline-primary me-2"
-                        onClick={() => alert(`Edit report: ${report.id}`)}
+                        onClick={() => alert(`Edit report: ${report.reportId}`)}
                       >
                         Edit
                       </button>
                       <button
                         className="btn btn-sm btn-outline-danger"
                         onClick={() =>
-                          alert(`Are you sure you want to delete ${report.id}?`)
+                          alert(
+                            `Are you sure you want to delete ${report.reportId}?`
+                          )
                         }
                       >
                         Delete
                       </button>
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" className="text-center">
-                    No reports found. Click "Create New Report" to get started.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p>No reports found. Click "Create New Report" to get started.</p>
+        )}
       </div>
     </div>
   );
