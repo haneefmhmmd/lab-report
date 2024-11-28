@@ -10,12 +10,12 @@ const HomePage = () => {
             <div className="row align-items-center justify-content-center text-center">
               <div className="col-md-6">
                 <h1 className="fs-1 fw-bold">MedLab</h1>
-                <p className="lead fs-5 mt-2">
+                <p className="lead fs-5">
                   Automating Pathology Report Generation. Empower your lab with
                   efficiency, accuracy, and seamless report generation.
                 </p>
-                <Link to="/features" className="btn btn-primary mt-3">
-                  Learn More
+                <Link to="/signup" className="btn btn-primary">
+                  Start Now
                 </Link>
               </div>
             </div>
@@ -26,7 +26,7 @@ const HomePage = () => {
           <div className="container">
             <div className="text-center mb-4">
               <h2 className="fs-3 fw-bold">Features of MedLab</h2>
-              <p className="text-secondary mt-2">
+              <p className="text-secondary">
                 Streamline pathology reporting with our advanced tools and
                 secure data management.
               </p>

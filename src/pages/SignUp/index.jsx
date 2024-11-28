@@ -122,7 +122,7 @@ const SignUp = () => {
               </button>
             </form>
             <div className="col-12">
-              <hr className="mt-4 mb-4 border-secondary" />
+              <hr className="mt-3 mb-3 border-secondary" />
               <p className="m-0 text-secondary text-center">
                 Already have an account?{" "}
                 <a href="/login" className="link-primary text-decoration-none">

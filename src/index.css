@@ -198,3 +198,11 @@ table {
   width: 100%;
   max-width: 480px;
 }
+
+@media (max-width: 767px) {
+  .navbar-collapse {
+    border-bottom-left-radius: 1rem; /* Rounded bottom-left corner */
+    border-bottom-right-radius: 1rem; /* Rounded bottom-right corner */
+    padding: 0.5rem; /* Padding of Bootstrap 2 */
+  }
+}

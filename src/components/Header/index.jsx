@@ -8,7 +8,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Handle logout logic
     dispatch({ type: "logout" });
     localStorage.clear();
     navigate("/");
@@ -16,8 +15,8 @@ const Header = () => {
 
   const handleBrandClick = (e) => {
     if (isLoggedIn) {
-      e.preventDefault(); // Prevent default navigation for the link
-      navigate("/dashboard"); // Redirect to the dashboard
+      e.preventDefault();
+      navigate("/dashboard");
     }
   };
 
@@ -28,14 +27,29 @@ const Header = () => {
       id="header"
     >
       <div className="container">
-        <Link
-          className="navbar-brand"
-          to="/"
-          onClick={handleBrandClick} // Handle brand click
-        >
+        {/* Brand Logo */}
+        <Link className="navbar-brand" to="/" onClick={handleBrandClick}>
           {isLoggedIn ? labName : "MedLab"}
         </Link>
-        <div className="collapse navbar-collapse" id="navbarNav">
+
+        {/* Toggle Button for Mobile */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* Collapsible Content */}
+        <div
+          className="bg-primary collapse navbar-collapse p-4 p-lg-0 rounded-bottom mt-2 mt-lg-0"
+          id="navbarNav"
+        >
           <ul className="navbar-nav ms-auto align-items-center">
             {isLoggedIn ? (
               <>
@@ -44,7 +58,7 @@ const Header = () => {
                     Welcome, {labName}
                   </Link>
                 </li>
-                <li className="nav-item ms-2">
+                <li className="nav-item ms-lg-2">
                   <button
                     className="btn btn-sm btn-outline-danger"
                     onClick={handleLogout}
@@ -61,7 +75,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="btn btn-light btn-sm ms-3" to="/signup">
+                  <Link className="btn btn-light btn-sm ms-lg-3" to="/signup">
                     Sign Up
                   </Link>
                 </li>
