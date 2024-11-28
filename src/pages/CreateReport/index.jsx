@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import AddTest from "../../components/AddTest";
 import Button, { ButtonLabel } from "../../components/Button";
 import FlexBox from "../../components/FlexBox";
@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import PatientDetails from "../../components/PatientDetails";
 import Report from "../../components/Report";
 import TestDetails from "../../components/TestDetails";
-import Toast from "../../components/Toast"; // Import the Toast component
+import Toast from "../../components/Toast";
 import { API_END_POINT } from "../../constants";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
@@ -16,12 +16,68 @@ function CreateReportPage() {
     useContext(LabContext);
   const dispatch = useContext(LabDispatchContext);
 
+  const { reportId } = useParams(); // Get reportId from the route
   const [toast, setToast] = useState(null); // Toast state
+  const [loading, setLoading] = useState(!!reportId); // Show loading state for edit mode
+
+  // Fetch report details if editing
+  useEffect(() => {
+    const fetchReport = async () => {
+      if (!reportId) return;
+
+      try {
+        const token = localStorage.getItem("token") || null;
+        dispatch({
+          type: "updateCurrentStep",
+          payload: 1,
+        });
+        const response = await fetch(
+          `${API_END_POINT}report/${labId}/${reportId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          setToast({ message: `Error: ${errorData.message}`, type: "error" });
+          return;
+        }
+
+        const data = await response.json();
+
+        // Populate the context with fetched report data
+        dispatch({
+          type: "updatePatientDetails",
+          payload: {
+            name: data.patientName,
+            age: data.age,
+            gender: data.gender,
+            dateOfTest: data.dateOfTest,
+          },
+        });
+
+        dispatch({
+          type: "bulkSelectTests",
+          payload: data.tests,
+        });
+      } catch (err) {
+        console.error("Error fetching report:", err);
+        setToast({ message: "An unexpected error occurred.", type: "error" });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReport();
+  }, []);
 
   const saveReport = async () => {
     try {
       const reportPayload = {
-        reportId: undefined,
+        reportId: reportId || undefined, // Include reportId only for updates
         age: patientDetails.age,
         dateOfTest: patientDetails.dateOfTest,
         gender: patientDetails.gender,
@@ -33,9 +89,13 @@ function CreateReportPage() {
       };
 
       const token = localStorage.getItem("token") || null;
+      const endpoint = reportId
+        ? `${API_END_POINT}report/${labId}/${reportId}`
+        : `${API_END_POINT}report/${labId}`;
+      const method = reportId ? "PUT" : "POST";
 
-      const response = await fetch(`${API_END_POINT}report/${labId}`, {
-        method: "POST",
+      const response = await fetch(endpoint, {
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -49,12 +109,22 @@ function CreateReportPage() {
         return;
       }
 
-      setToast({ message: "Report saved successfully!", type: "success" });
+      setToast({
+        message: reportId
+          ? "Report updated successfully!"
+          : "Report saved successfully!",
+        type: "success",
+      });
+
+      // // Navigate back to the dashboard after success
+      // setTimeout(() => navigate("/dashboard"), 2000);
     } catch (err) {
       console.error("Error saving report:", err);
       setToast({ message: "An unexpected error occurred.", type: "error" });
     }
   };
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="App">
@@ -84,7 +154,11 @@ function CreateReportPage() {
             </Button>
           )}
           <h2 className="text--lg fw-700 text-center">
-            {currentStep === 2 ? "Generate Report" : "Create Report"}
+            {reportId
+              ? "Edit Report"
+              : currentStep === 2
+              ? "Generate Report"
+              : "Create Report"}
           </h2>
           {currentStep === 2 && (
             <Button className="ml-auto" onClick={() => saveReport()}>

@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { LabContext } from "../../context/LabContext";
-
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { API_END_POINT } from "../../constants";
+import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 const Dashboard = () => {
   const { labId, user } = useContext(LabContext);
+  const dispatch = useContext(LabDispatchContext);
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [deleteReportId, setDeleteReportId] = useState(null); // Report ID to delete
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Fetch reports for the logged-in lab
   useEffect(() => {
@@ -33,6 +35,14 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+
+        if (response.status === 401) {
+          // Handle unauthorized error
+          dispatch({ type: "logout" });
+          localStorage.clear();
+          navigate("/login");
+          return;
+        }
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -136,11 +146,13 @@ const Dashboard = () => {
                     <td>{report.patientName}</td>
                     <td>{report.gender}</td>
                     <td>{report.age}</td>
-                    <td>{report.testDate}</td>
+                    <td>{report.dateOfTest}</td>
                     <td>
                       <button
                         className="btn btn-sm btn-outline-primary me-2"
-                        onClick={() => alert(`Edit report: ${report.reportId}`)}
+                        onClick={
+                          () => navigate(`/report/${report.reportId}`) // Navigate to edit page
+                        }
                       >
                         Edit
                       </button>

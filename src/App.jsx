@@ -61,6 +61,14 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/report/:reportId"
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <CreateReport edit />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>

@@ -3,15 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 const Header = () => {
-  const { isLoggedIn, labData, labName } = useContext(LabContext);
+  const { isLoggedIn, labName } = useContext(LabContext);
   const dispatch = useContext(LabDispatchContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Handle logout logic here (e.g., clear session via API)
+    // Handle logout logic
     dispatch({ type: "logout" });
     localStorage.clear();
     navigate("/");
+  };
+
+  const handleBrandClick = (e) => {
+    if (isLoggedIn) {
+      e.preventDefault(); // Prevent default navigation for the link
+      navigate("/dashboard"); // Redirect to the dashboard
+    }
   };
 
   return (
@@ -21,15 +28,21 @@ const Header = () => {
       id="header"
     >
       <div className="container">
-        <Link className="navbar-brand" to="/">
-          MedLab
+        <Link
+          className="navbar-brand"
+          to="/"
+          onClick={handleBrandClick} // Handle brand click
+        >
+          {isLoggedIn ? labName : "MedLab"}
         </Link>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto align-items-center">
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
-                  <span className="nav-link">Welcome, {labName}</span>
+                  <Link className="nav-link" to="/dashboard">
+                    Welcome, {labName}
+                  </Link>
                 </li>
                 <li className="nav-item ms-2">
                   <button

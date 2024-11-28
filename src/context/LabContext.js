@@ -42,6 +42,7 @@ const reducer = function (state, action) {
     }
 
     case "logout": {
+      localStorage.clear();
       return { ...state, isLoggedIn: false, labData: null };
     }
 
@@ -98,6 +99,31 @@ const reducer = function (state, action) {
         })),
         selectedTests: [],
       };
+    }
+    case "bulkSelectTests": {
+      const backendTests = action.payload; // Array of tests from BE, e.g., [{ name: "", value: "" }]
+      const backendTestNames = backendTests.map((test) => test.testName);
+
+      // Update the tests array
+      const updatedTests = state.tests.map((test) => {
+        if (backendTestNames.includes(test.name)) {
+          // Find the corresponding test from the backend payload to get the value
+          const matchingBackendTest = backendTests.find(
+            (backendTest) => backendTest.testName === test.name
+          );
+          return {
+            ...test,
+            value: matchingBackendTest.testValue, // Update the value
+            isSelected: true, // Mark as selected
+          };
+        }
+        return { ...test, isSelected: false }; // Unselect other tests
+      });
+
+      // Update the selectedTests array
+      const selectedTests = updatedTests.filter((test) => test.isSelected);
+
+      return { ...state, tests: updatedTests, selectedTests };
     }
 
     default: {
