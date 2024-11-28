@@ -9,6 +9,7 @@ const SignUp = () => {
     passwordHash: "",
     labAddress: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -22,28 +23,30 @@ const SignUp = () => {
     e.preventDefault();
 
     const requestPayload = {
-      labId: "LAB" + new Date().getTime(), // Generate unique Lab ID
-      labName: formData.labName,
-      labEmail: formData.labEmail,
-      passwordHash: formData.passwordHash,
-      labAddress: formData.labAddress,
+      LabId: "LAB" + new Date().getTime(), // Generate unique Lab ID
+      LabName: formData.labName,
+      LabEmail: formData.labEmail,
+      PasswordHash: formData.passwordHash,
+      LabAddress: formData.labAddress,
     };
 
     try {
       const response = await fetch("http://localhost:5171/api/Registration", {
         method: "POST",
-        body: requestPayload,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestPayload),
       });
       if (response.status === 200 || response.status === 201) {
-        alert("Sign-up successful! Please log in.");
         navigate("/login");
       }
     } catch (error) {
+      setErrorMessage("Error during registration. Please try again later!");
       console.error(
         "Error during registration:",
         error.response?.data || error.message
       );
-      alert("Registration failed. Please try again.");
     }
   };
 
@@ -57,6 +60,11 @@ const SignUp = () => {
               Enter your details to register
             </h3>
             <form onSubmit={handleSignUp} className="mt-4">
+              {errorMessage && (
+                <div className="alert alert-danger" role="alert">
+                  {errorMessage}
+                </div>
+              )}
               <div className="mb-3">
                 <label htmlFor="labName" className="form-label">
                   Lab Name
