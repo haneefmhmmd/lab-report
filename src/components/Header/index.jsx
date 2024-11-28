@@ -3,19 +3,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 const Header = () => {
-  const { isLoggedIn, user } = useContext(LabContext);
+  const { isLoggedIn, labData, labName } = useContext(LabContext);
   const dispatch = useContext(LabDispatchContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // Handle logout logic here (e.g., clear session via API)
     dispatch({ type: "logout" });
+    localStorage.clear();
     navigate("/");
   };
 
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-light"
+      className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
       data-bs-theme="dark"
     >
       <div className="container">
@@ -27,11 +28,11 @@ const Header = () => {
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
-                  <span className="nav-link">Welcome, {user?.name}</span>
+                  <span className="nav-link">Welcome, {labName}</span>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item ms-2">
                   <button
-                    className="btn btn-outline-danger"
+                    className="btn btn-sm btn-outline-danger"
                     onClick={handleLogout}
                   >
                     Sign Out

@@ -194,7 +194,7 @@ table {
   border-color: var(--bs-table-border-color);
 }
 
-/* --secondary-color: #f4f4f4;
---tertiary-color: #c4c4c4;
---quaternary-color: #eef0f5;
---danger-color: #e93b34; */
+.auth-card-container {
+  width: 100%;
+  max-width: 480px;
+}

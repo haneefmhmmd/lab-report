@@ -1,20 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    labName: "",
+    labEmail: "",
+    passwordHash: "",
+    labAddress: "",
+  });
 
-  const handleSignUp = (e) => {
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Simulate API call for registration
-    alert("Sign-up successful! Please log in.");
-    navigate("/login");
+
+    const requestPayload = {
+      labId: "LAB" + new Date().getTime(), // Generate unique Lab ID
+      labName: formData.labName,
+      labEmail: formData.labEmail,
+      passwordHash: formData.passwordHash,
+      labAddress: formData.labAddress,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5171/api/Registration", {
+        method: "POST",
+        body: requestPayload,
+      });
+      if (response.status === 200 || response.status === 201) {
+        alert("Sign-up successful! Please log in.");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(
+        "Error during registration:",
+        error.response?.data || error.message
+      );
+      alert("Registration failed. Please try again.");
+    }
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="card shadow-sm p-3 col-md-4">
+    <div className="container py-5">
+      <div className="d-flex justify-content-center">
+        <div className="card shadow-sm col-md-6 col-lg-4">
           <div className="card-body">
             <h2 className="h4 text-center">Registration</h2>
             <h3 className="fs-6 fw-normal text-secondary text-center m-0">
@@ -22,37 +58,56 @@ const SignUp = () => {
             </h3>
             <form onSubmit={handleSignUp} className="mt-4">
               <div className="mb-3">
-                <label htmlFor="name" className="form-label">
-                  Name
+                <label htmlFor="labName" className="form-label">
+                  Lab Name
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="name"
+                  id="labName"
+                  value={formData.labName}
+                  onChange={handleChange}
                   required
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email
+                <label htmlFor="labEmail" className="form-label">
+                  Lab Email
                 </label>
                 <input
                   type="email"
                   className="form-control"
-                  id="email"
+                  id="labEmail"
+                  value={formData.labEmail}
+                  onChange={handleChange}
                   required
                 />
               </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="form-label">
+              <div className="mb-3">
+                <label htmlFor="passwordHash" className="form-label">
                   Password
                 </label>
                 <input
                   type="password"
                   className="form-control"
-                  id="password"
+                  id="passwordHash"
+                  value={formData.passwordHash}
+                  onChange={handleChange}
                   required
                 />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="labAddress" className="form-label">
+                  Lab Address
+                </label>
+                <textarea
+                  className="form-control"
+                  id="labAddress"
+                  rows="3"
+                  value={formData.labAddress}
+                  onChange={handleChange}
+                  required
+                ></textarea>
               </div>
               <button type="submit" className="btn btn-primary w-100">
                 Sign Up
@@ -62,7 +117,7 @@ const SignUp = () => {
               <hr className="mt-4 mb-4 border-secondary" />
               <p className="m-0 text-secondary text-center">
                 Already have an account?{" "}
-                <a href="#!" className="link-primary text-decoration-none">
+                <a href="/login" className="link-primary text-decoration-none">
                   Login
                 </a>
               </p>
