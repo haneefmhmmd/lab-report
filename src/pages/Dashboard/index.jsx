@@ -149,7 +149,7 @@ const Dashboard = () => {
                     <td>{report.dateOfTest}</td>
                     <td>
                       <button
-                        className="btn btn-sm btn-outline-primary me-2"
+                        className="btn btn-sm btn-outline-warning me-2"
                         onClick={
                           () => navigate(`/report/${report.reportId}`) // Navigate to edit page
                         }
