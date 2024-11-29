@@ -13,7 +13,7 @@ const initialData = {
     dateOfTest: new Date().toISOString().split("T")[0],
     age: "",
   },
-  tests: labData.map((test) => ({ ...test, value: "", isSelected: false })),
+  tests: [],
   selectedTests: [],
   isModalOpen: false,
   currentStep: 1,
@@ -44,6 +44,17 @@ const reducer = function (state, action) {
     case "logout": {
       localStorage.clear();
       return { ...state, isLoggedIn: false, labData: null };
+    }
+
+    case "addTests": {
+      return {
+        ...state,
+        tests: action.payload.map((test) => ({
+          ...test,
+          value: "",
+          isSelected: false,
+        })),
+      };
     }
 
     case "updatePatientDetails": {
@@ -92,7 +103,7 @@ const reducer = function (state, action) {
           dateOfTest: new Date().toISOString().split("T")[0],
           age: "",
         },
-        tests: labData.map((test) => ({
+        tests: state.tests.map((test) => ({
           ...test,
           value: "",
           isSelected: false,

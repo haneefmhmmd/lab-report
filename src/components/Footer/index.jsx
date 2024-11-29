@@ -1,11 +1,58 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 import Button, { ButtonLabel } from "../Button";
 import Flexbox from "../FlexBox";
 
+import { API_END_POINT } from "../../constants";
+import Toast from "../Toast";
+
 export default function Footer() {
   const dispatch = useContext(LabDispatchContext);
-  const { currentStep, selectedTests } = useContext(LabContext);
+  const { labId, currentStep, selectedTests } = useContext(LabContext);
+  const [testsLoading, setTestsLoading] = useState(true);
+  const [toast, setToast] = useState(null); // Toast state
+  useEffect(() => {
+    const fetchTests = async () => {
+      try {
+        setTestsLoading(true);
+        setToast(null);
+
+        const token = localStorage.getItem("token") || null;
+
+        if (!labId) {
+          setToast("Lab ID not found. Please log in again.");
+          setTestsLoading(false);
+          return;
+        }
+
+        const response = await fetch(`${API_END_POINT}tests/${labId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          setToast("Failed to fetch tests.");
+          setTestsLoading(false);
+          return;
+        }
+
+        const data = await response.json();
+        dispatch({
+          type: "addTests",
+          payload: data.tests,
+        });
+      } catch (err) {
+        setToast({ message: `Failed to load tests`, type: "error" });
+      } finally {
+        setTestsLoading(false);
+      }
+    };
+
+    fetchTests();
+  }, [labId]);
+
   const addBtnClickHandler = () => {
     dispatch({
       type: "toggleModal",
@@ -40,10 +87,19 @@ export default function Footer() {
         >
           <ButtonLabel label="Continue" />
         </Button>
-        <Button style={{ "--ml": 5 }} onClick={addBtnClickHandler}>
-          <ButtonLabel label="Add Test" />
-        </Button>
+        {!testsLoading && (
+          <Button style={{ "--ml": 5 }} onClick={addBtnClickHandler}>
+            <ButtonLabel label="Add Test" />
+          </Button>
+        )}
       </Flexbox>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </footer>
   );
 }
