@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import TestPage from "./pages/Tests";
 
 const App = () => {
   const { isLoggedIn } = useContext(LabContext);
@@ -66,6 +67,14 @@ const App = () => {
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
                 <CreateReport edit />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/tests"
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <TestPage />
               </PrivateRoute>
             }
           />

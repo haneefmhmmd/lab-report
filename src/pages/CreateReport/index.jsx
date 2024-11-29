@@ -129,6 +129,65 @@ function CreateReportPage({ edit = false }) {
     }
   };
 
+  const updatePatientDetails = async () => {
+    try {
+      // Prepare the patch payload
+      const patchPayload = [];
+      if (patientDetails.name)
+        patchPayload.push({
+          op: "replace",
+          path: "/PatientName",
+          value: patientDetails.name,
+        });
+      if (patientDetails.age !== undefined)
+        patchPayload.push({
+          op: "replace",
+          path: "/Age",
+          value: patientDetails.age,
+        });
+      if (patientDetails.gender)
+        patchPayload.push({
+          op: "replace",
+          path: "/Gender",
+          value: patientDetails.gender,
+        });
+      if (patientDetails.dateOfTest)
+        patchPayload.push({
+          op: "replace",
+          path: "/DateOfTest",
+          value: patientDetails.dateOfTest,
+        });
+
+      const token = localStorage.getItem("token") || null;
+
+      const response = await fetch(
+        `${API_END_POINT}report/${labId}/${reportId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json-patch+json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(patchPayload),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setToast({ message: `Error: ${errorData.message}`, type: "error" });
+        return;
+      }
+
+      setToast({
+        message: "Patient details updated successfully!",
+        type: "success",
+      });
+    } catch (err) {
+      console.error("Error updating patient details:", err);
+      setToast({ message: "An unexpected error occurred.", type: "error" });
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -165,6 +224,11 @@ function CreateReportPage({ edit = false }) {
               ? "Generate Report"
               : "Create Report"}
           </h2>
+          {currentStep === 1 && edit && (
+            <Button className="ml-auto" onClick={() => updatePatientDetails()}>
+              <ButtonLabel label="Update Patient Details" />
+            </Button>
+          )}
           {currentStep === 2 && showSave && (
             <Button className="ml-auto" onClick={() => saveReport()}>
               <ButtonLabel label="Save" />
