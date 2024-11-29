@@ -11,6 +11,7 @@ import CreateReport from "./pages/CreateReport";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import ManageAccount from "./pages/ManageAccount";
 import SignUp from "./pages/SignUp";
 import TestPage from "./pages/Tests";
 
@@ -75,6 +76,14 @@ const App = () => {
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
                 <TestPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <ManageAccount />
               </PrivateRoute>
             }
           />

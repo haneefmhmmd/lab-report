@@ -50,23 +50,22 @@ const Header = () => {
           className="bg-primary collapse navbar-collapse p-4 p-lg-0 rounded-bottom mt-2 mt-lg-0"
           id="navbarNav"
         >
-          {isLoggedIn && (
-            <ul className="navbar-nav align-items-center">
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/tests">
-                    Tests
-                  </Link>
-                </li>
-              </>
-            </ul>
-          )}
           <ul className="navbar-nav ms-auto align-items-center">
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/dashboard">
-                    Welcome, {labName}
+                    Dashboard
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/tests">
+                    Tests
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/account">
+                    Account
                   </Link>
                 </li>
                 <li className="nav-item ms-lg-2">
