@@ -310,7 +310,7 @@ const TestPage = () => {
                     <label htmlFor="testName">Test Name</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control mt-1"
                       id="testName"
                       placeholder="Enter test name"
                       name="name"
@@ -318,11 +318,11 @@ const TestPage = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="form-group mt-3">
                     <label htmlFor="testUnit">Unit</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control mt-1"
                       id="testUnit"
                       placeholder="Enter unit"
                       name="unit"
@@ -330,11 +330,11 @@ const TestPage = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="form-group mt-3">
                     <label htmlFor="testReferenceValue">Reference Value</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control mt-1"
                       id="testReferenceValue"
                       placeholder="Enter reference value"
                       name="referenceValue"
@@ -344,7 +344,7 @@ const TestPage = () => {
                   </div>
                 </form>
               </div>
-              <div className="modal-footer">
+              <div className="modal-footer mt-2">
                 <button
                   type="button"
                   className="btn btn-secondary"

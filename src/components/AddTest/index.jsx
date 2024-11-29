@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { LabContext, LabDispatchContext } from "../../context/LabContext";
 import Button, { ButtonLabel } from "../Button";
 import Checkbox from "../CheckBox";
 import Inputfield from "../Inputfield";
 import style from "./AddTest.module.css";
-import { v4 as uuidv4 } from "uuid";
-import { LabContext, LabDispatchContext } from "../../context/LabContext";
 export default function AddTest() {
   const [seachText, setSearchText] = useState("");
   const { tests } = useContext(LabContext);
@@ -20,8 +20,11 @@ export default function AddTest() {
     setSearchText(e.target.value);
   };
 
-  const TestList = ({ testList }) =>
-    testList.map((test) => (
+  const TestList = ({ testList }) => {
+    if (testList.length === 0) {
+      return <li>No tests found! Please add tests from Tests Page.</li>;
+    }
+    return testList.map((test) => (
       <li
         className={`${style.test} ${test.isSelected ? style.selected : ""}`}
         onClick={() => onTestClickHandler(test.id)}
@@ -31,6 +34,7 @@ export default function AddTest() {
         <Checkbox checked={test.isSelected} />
       </li>
     ));
+  };
 
   const FilteredTestList = () => {
     const filteredList = tests.filter((test) =>
