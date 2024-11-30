@@ -142,7 +142,7 @@ export default function Report() {
                   <Text>{test.name}</Text>
                 </View>
                 <View style={styles.ValueCol}>
-                  <Text>{`${test.value} ${test.unit}`}</Text>
+                  <Text>{`${test.value} ${test.unit ?? ""}`}</Text>
                 </View>
                 <View style={styles.normalValue}>
                   {Array.isArray(test.referenceValue) ? (

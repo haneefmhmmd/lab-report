@@ -104,7 +104,7 @@ const Login = () => {
               <hr className="mt-3 mb-3 border-secondary" />
               <p className="m-0 text-secondary text-center">
                 Don't have an account?{" "}
-                <a href="#!" className="link-primary text-decoration-none">
+                <a href="signup" className="link-primary text-decoration-none">
                   Sign Up
                 </a>
               </p>
