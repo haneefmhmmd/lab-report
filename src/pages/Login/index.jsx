@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_END_POINT } from "../../constants";
+import { API_END_POINT, API_KEY } from "../../constants";
 import { LabDispatchContext } from "../../context/LabContext";
 
 const Login = () => {
@@ -18,6 +18,8 @@ const Login = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          apiKey: API_KEY,
+          mode: "no-cors",
         },
         body: JSON.stringify({ LabEmail: email, PasswordHash: password }),
       });

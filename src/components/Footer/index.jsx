@@ -3,7 +3,7 @@ import { LabContext, LabDispatchContext } from "../../context/LabContext";
 import Button, { ButtonLabel } from "../Button";
 import Flexbox from "../FlexBox";
 
-import { API_END_POINT } from "../../constants";
+import { API_END_POINT, API_KEY } from "../../constants";
 import Toast from "../Toast";
 
 export default function Footer() {
@@ -28,6 +28,7 @@ export default function Footer() {
         const response = await fetch(`${API_END_POINT}tests/${labId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            apiKey: API_KEY,
           },
         });
 

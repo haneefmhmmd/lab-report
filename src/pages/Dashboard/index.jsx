@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
-import { API_END_POINT } from "../../constants";
+import { API_END_POINT, API_KEY } from "../../constants";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 const Dashboard = () => {
@@ -33,6 +33,7 @@ const Dashboard = () => {
         const response = await fetch(`${API_END_POINT}report/${labId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            apiKey: API_KEY,
           },
         });
 
@@ -77,6 +78,7 @@ const Dashboard = () => {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
+            apiKey: API_KEY,
           },
         }
       );

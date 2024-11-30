@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { API_END_POINT } from "../../constants"; // Define your API endpoint
+import { API_END_POINT, API_KEY } from "../../constants"; // Define your API endpoint
 import { LabContext } from "../../context/LabContext";
 
 const ManageAccount = () => {
@@ -32,6 +32,7 @@ const ManageAccount = () => {
         const response = await fetch(`${API_END_POINT}labs/${labId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            apiKey: API_KEY,
           },
         });
 
@@ -113,6 +114,7 @@ const ManageAccount = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          apiKey: API_KEY,
         },
         body: JSON.stringify(patchPayload),
       });

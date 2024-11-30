@@ -8,7 +8,7 @@ import PatientDetails from "../../components/PatientDetails";
 import Report from "../../components/Report";
 import TestDetails from "../../components/TestDetails";
 import Toast from "../../components/Toast";
-import { API_END_POINT } from "../../constants";
+import { API_END_POINT, API_KEY } from "../../constants";
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 function CreateReportPage({ edit = false }) {
@@ -37,6 +37,7 @@ function CreateReportPage({ edit = false }) {
           {
             headers: {
               Authorization: `Bearer ${token}`,
+              apiKey: API_KEY,
             },
           }
         );
@@ -100,6 +101,7 @@ function CreateReportPage({ edit = false }) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          apiKey: API_KEY,
         },
         body: JSON.stringify(reportPayload),
       });
@@ -167,6 +169,7 @@ function CreateReportPage({ edit = false }) {
           headers: {
             "Content-Type": "application/json-patch+json",
             Authorization: `Bearer ${token}`,
+            apiKey: API_KEY,
           },
           body: JSON.stringify(patchPayload),
         }

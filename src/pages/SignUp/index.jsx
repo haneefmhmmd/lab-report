@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_END_POINT } from "../../constants";
+import { API_END_POINT, API_KEY } from "../../constants";
 const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -35,6 +35,7 @@ const SignUp = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          apiKey: API_KEY,
         },
         body: JSON.stringify(requestPayload),
       });

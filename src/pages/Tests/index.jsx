@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { API_END_POINT } from "../../constants"; // Define your API endpoint
+import { API_END_POINT, API_KEY } from "../../constants"; // Define your API endpoint
 import { LabContext, LabDispatchContext } from "../../context/LabContext";
 
 const TestPage = () => {
@@ -36,6 +36,7 @@ const TestPage = () => {
         const response = await fetch(`${API_END_POINT}tests/${labId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            apiKey: API_KEY,
           },
         });
 
@@ -100,6 +101,7 @@ const TestPage = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          apiKey: API_KEY,
         },
         body: JSON.stringify(newTestDTO),
       });
@@ -151,6 +153,7 @@ const TestPage = () => {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            apiKey: API_KEY,
           },
           body: JSON.stringify(newTest),
         }
@@ -184,6 +187,7 @@ const TestPage = () => {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
+          apiKey: API_KEY,
         },
       });
 
