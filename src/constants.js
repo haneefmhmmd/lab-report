@@ -1,5 +1,5 @@
 // LocalHost:
-export const API_END_POINT = "http://localhost:5171/api/";
+export const API_END_POINT = "http://localhost:3002/api/";
 
 // ECS
 // export const API_END_POINT = "http://3.85.134.133:8080/api/";
